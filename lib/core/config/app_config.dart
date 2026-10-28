@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppConfig {
@@ -69,6 +68,8 @@ class AppConfig {
     }
   }
 
+  static const String productionApiBaseUrl = 'https://water-fix.vercel.app/api';
+
   static String get apiBaseUrl {
     if (_overrideBaseUrl != null && _overrideBaseUrl!.isNotEmpty) {
       return _overrideBaseUrl!;
@@ -76,12 +77,6 @@ class AppConfig {
     if (_envBaseUrl.isNotEmpty) {
       return _envBaseUrl;
     }
-    if (kIsWeb) {
-      return 'http://127.0.0.1:5000/api';
-    }
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      return 'http://$laptopLanIp:5000/api';
-    }
-    return 'http://127.0.0.1:5000/api';
+    return productionApiBaseUrl;
   }
 }
